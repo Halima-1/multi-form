@@ -1,5 +1,7 @@
 let formPageIndex = JSON.parse(localStorage.getItem("pageIndex")) || 1
 let formPage = document.getElementById("formContainer")
+
+// multiple steps form display
 const loadPage = () => {
     formPage.innerHTML = ""
     if (formPageIndex === 1) {
@@ -23,7 +25,7 @@ const loadPage = () => {
         `
     }
     else if (formPageIndex === 2) {
-        formPage.innerHTML += `<form action="">
+        formPage.innerHTML += `
  <h2>Select your plan</h2>
 <p>You have the option of monthly or yearly billing.   </p>
 
@@ -40,19 +42,15 @@ const loadPage = () => {
 </div>
 
  <button id="nextBtn">Next</button>
-</form> 
 
 `
     }
-
     else if (formPageIndex === 3) {
         formPage.innerHTML += `  
         // <form action="">
     <!-- Add-ons Step -->
 <h2>Choose Add-ons</h2>
 <p>Select additional features to enhance your subscription.</p>
-
-
 <br>
 <label>
 <input type="checkbox" class="addon" data-price="10">
@@ -83,28 +81,79 @@ Advanced Analytics & Reports — $20/month
         endForm()
     }
 }
-
 loadPage()
 
-
-
+// summary page display
 const endForm = () => {
     formPage.innerHTML = ""
     formPage.innerHTML += "This is the summary page"
 }
 
-
+// next button function
 const nextBtn = document.getElementById("nextBtn")
 nextBtn.addEventListener("click", () => {
-    formPageIndex++;
-    if (formPageIndex < 3) {
-        loadPage();
+    // getting user details
+
+    const users = JSON.parse(localStorage.getItem("users")) || []
+
+
+
+
+
+    console.log(typeof (users))
+    localStorage.setItem("users", JSON.stringify(users))
+
+    if (formPageIndex === 1) {
+        const namee = document.getElementById("name").value
+        const email = document.getElementById("email").value
+        const phone = document.getElementById("num").value
+        const user = {
+            name: namee,
+            email: email,
+            phone: phone
+        }
+        users.push(user)
+        if (namee && email && phone) {
+            formPageIndex++;
+
+            loadPage();
+
+        }
+        else {
+            console.log("input correct details ")
+
+        }
     }
-    else {
-        endForm();
+    else if (formPageIndex === 2) {
+        const arcade = document.getElementById("arcade")
+        const advanced = document.getElementById("advanced")
+        const pro = document.getElementById("pro")
+        if (localStorage.getItem("plan")) {
+            formPageIndex++;
+
+            loadPage();
+        }
+        else {
+            console.log("Kindly select a subscription plan ")
+
+        }
     }
+    // else {
+    //     endForm();
+    // }
     console.log(formPageIndex)
     localStorage.setItem("pageIndex", formPageIndex)
     // window.location.href = "index.html"
 });
+
+arcade.addEventListener("click", () => {
+    localStorage.setItem("plan", "Arcade")
+})
+
+advanced.addEventListener("click", () => {
+    localStorage.setItem("plan", "Advanced")
+})
+pro.addEventListener("click", () => {
+    localStorage.setItem("plan", "Pro")
+})
 
