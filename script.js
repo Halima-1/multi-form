@@ -1,9 +1,9 @@
-let formPageIndex = localStorage.getItem("pageIndex") || 1
-const formPage = document.getElementById("formContainer")
+let formPageIndex = JSON.parse(localStorage.getItem("pageIndex")) || 1
+let formPage = document.getElementById("formContainer")
 const loadPage = () => {
-
-    if (formPageIndex = 1) {
-        formPage.innerHTML = ` 
+    formPage.innerHTML = ""
+    if (formPageIndex === 1) {
+        formPage.innerHTML += ` 
         <h2>Personal Info</h2>
         <p>Please provide your name, email address and phone number</p>
         
@@ -22,8 +22,8 @@ const loadPage = () => {
         <button id="nextBtn">Next</button>
         `
     }
-    else if (formPageIndex = 2) {
-        formPage.innerHTML = `<form action="">
+    else if (formPageIndex === 2) {
+        formPage.innerHTML += `<form action="">
  <h2>Select your plan</h2>
 <p>You have the option of monthly or yearly billing.   </p>
 
@@ -45,8 +45,8 @@ const loadPage = () => {
 `
     }
 
-    else if (formPageIndex = 3) {
-        formPage.innerHTML = `  
+    else if (formPageIndex === 3) {
+        formPage.innerHTML += `  
         // <form action="">
     <!-- Add-ons Step -->
 <h2>Choose Add-ons</h2>
@@ -79,6 +79,7 @@ Advanced Analytics & Reports — $20/month
     }
 
     else {
+        return
         endForm()
     }
 }
@@ -88,14 +89,10 @@ loadPage()
 
 
 const endForm = () => {
-
+    formPage.innerHTML = ""
+    formPage.innerHTML += "This is the summary page"
 }
-// next b
-// const next = () => {
-//     if (formPageIndex < 4) {
-//         formPageIndex++
-//     }
-// }
+
 
 const nextBtn = document.getElementById("nextBtn")
 nextBtn.addEventListener("click", () => {
