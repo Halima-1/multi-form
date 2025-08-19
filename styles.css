@@ -1,0 +1,107 @@
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    align-items: center;
+}
+
+.container {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 50px;
+
+    /* align-items: center; */
+}
+
+#side {
+    width: 30%;
+    background-image: url("assets/images/bg-sidebar-desktop.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: block;
+    text-align: center;
+    align-content: center;
+}
+
+#side p {
+    padding: 3px 7px;
+    border: 2px solid white;
+    border-radius: 100%;
+    color: white;
+    width: max-content;
+    margin: auto;
+    margin-bottom: 20px;
+    align-self: center;
+    align-items: center;
+
+}
+
+#formContainer {
+    width: 60%;
+    display: block;
+    padding: 20px;
+}
+
+#formContainer h2 {
+    font-weight: 600;
+    font-size: 30px;
+    color: navy;
+    width: 80%;
+    margin: 10px auto;
+
+}
+
+#formContainer p {
+    width: 80%;
+    margin: 10px auto;
+}
+
+#formContainer div {
+    width: 80%;
+    margin: 10px auto;
+    display: block;
+}
+
+input {
+    outline: none;
+    width: 100%;
+    margin: 10px auto;
+    border: 1px solid grey;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+button {
+    width: 100px;
+    /* margin: 10px auto; */
+    border: 1px solid grey;
+    padding: 7px;
+    border-radius: 10px;
+    background-color: navy;
+    color: white;
+    margin-left: 320px;
+}
+
+.plan {
+    width: 70% !important;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+    border: 1px solid grey;
+    border-radius: 10px;
+
+}
+
+.plan img {
+    width: 25px;
+    height: 25px;
+    margin-top: 6px;
+}

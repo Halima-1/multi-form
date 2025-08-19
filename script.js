@@ -1,16 +1,23 @@
 let formPageIndex = JSON.parse(localStorage.getItem("pageIndex")) || 1
 let formPage = document.getElementById("formContainer")
+let page1 = document.getElementById("page1")
+let page2 = document.getElementById("page2")
+let page3 = document.getElementById("page3")
+let page4 = document.getElementById("page4")
 
 // multiple steps form display
 const loadPage = () => {
     formPage.innerHTML = ""
     if (formPageIndex === 1) {
+        page1.style.backgroundColor = "white"
+        page1.style.color = "navy"
+
         formPage.innerHTML += ` 
         <h2>Personal Info</h2>
         <p>Please provide your name, email address and phone number</p>
         
         <div>
-            <label for="name">Name</label>
+            <label for="name">Name</label> <br>
             <input type="text" name="" id="name" placeholder="e.g Blessing John">
         </div>
         <div>
@@ -25,18 +32,31 @@ const loadPage = () => {
         `
     }
     else if (formPageIndex === 2) {
+        page1.style.backgroundColor = "none"
+
+        page2.style.backgroundColor = "white"
+        page2.style.color = "navy"
+
         formPage.innerHTML += `
  <h2>Select your plan</h2>
 <p>You have the option of monthly or yearly billing.   </p>
 
-<div id="arcade">
+<div id="arcade" class="plan">
+<img src="assets/images/icon-arcade.svg" alt="">
+
+
 <p>Arcade</p>
 <p>9$/mo</p>
 </div>
-<div id="advanced">
+<div id="advanced" class="plan">
+<img src="assets/images/icon-advanced.svg" alt="">
+
 <p>Advanced</p>
 <p>15$/mo</p>
-</div><div id="pro">
+</div>
+<div id="pro" class="plan">
+<img src="assets/images/icon-pro.svg" alt="">
+
 <p>Pro</p>
 <p>150$/Yr</p>
 </div>
@@ -46,6 +66,12 @@ const loadPage = () => {
 `
     }
     else if (formPageIndex === 3) {
+        page1.style.backgroundColor = "none"
+        page2.style.backgroundColor = "none"
+
+        page3.style.backgroundColor = "white"
+        page3.style.color = "navy"
+
         formPage.innerHTML += `  
     <!-- Add-ons Step -->
 <h2>Choose Add-ons</h2>
@@ -99,7 +125,7 @@ nextBtn.addEventListener("click", () => {
 
 
     console.log(typeof (users))
-    const user = {}
+    let user = {}
     if (formPageIndex === 1) {
         const namee = document.getElementById("name").value
         const email = document.getElementById("email").value
@@ -116,6 +142,8 @@ nextBtn.addEventListener("click", () => {
         if (namee && email && phone) {
             formPageIndex++;
             users.push(user)
+            localStorage.setItem("user", JSON.stringify(user))
+
             localStorage.setItem("users", JSON.stringify(users))
 
             loadPage();
@@ -127,11 +155,17 @@ nextBtn.addEventListener("click", () => {
         }
     }
     else if (formPageIndex === 2) {
-        const plan = localStorage.getItem("plan")
+        let plan = localStorage.getItem("plan")
+        console.log(typeof (plan))
+
         if (plan) {
             formPageIndex++;
-            user[0].plan = plan
+            let user = localStorage.getItem("user")
+
+            user.plann = plan
             users.push(user)
+            localStorage.setItem("pageIndex", formPageIndex)
+
             loadPage();
 
         }
@@ -139,6 +173,20 @@ nextBtn.addEventListener("click", () => {
             console.log("Kindly select a subscription plan ")
 
         }
+
+        const arcade = document.getElementById("arcade")
+        const advanced = document.getElementById("advanced")
+        const pro = document.getElementById("pro")
+        arcade.addEventListener("click", () => {
+            localStorage.setItem("plan", "Arcade")
+        })
+
+        advanced.addEventListener("click", () => {
+            localStorage.setItem("plan", "Advanced")
+        })
+        pro.addEventListener("click", () => {
+            localStorage.setItem("plan", "Pro")
+        })
     }
 
     else if (formPageIndex === 3) {
@@ -166,8 +214,13 @@ nextBtn.addEventListener("click", () => {
 
         if (localStorage.getItem("totalAddons")) {
             formPageIndex++;
-            user[0].plan = localStorage.getItem("totalAddons")
+            let user = localStorage.getItem("user")
+
+            let addOns = JSON.parse(localStorage.getItem("totalAddons"))
+            user.addOns = addOns
             users.push(user)
+            localStorage.setItem("pageIndex", formPageIndex)
+
             endForm();
         }
         else {
@@ -177,6 +230,8 @@ nextBtn.addEventListener("click", () => {
         }
 
     }
+    localStorage.setItem("user", JSON.stringify(user))
+
     localStorage.setItem("users", JSON.stringify(users))
 
     // else {
@@ -189,18 +244,6 @@ nextBtn.addEventListener("click", () => {
 
 const addOns = JSON.parse(localStorage.getItem("addOns")) || []
 const adds = {}
-const arcade = document.getElementById("arcade")
-const advanced = document.getElementById("advanced")
-const pro = document.getElementById("pro")
-arcade.addEventListener("click", () => {
-    localStorage.setItem("plan", "Arcade")
-})
 
-advanced.addEventListener("click", () => {
-    localStorage.setItem("plan", "Advanced")
-})
-pro.addEventListener("click", () => {
-    localStorage.setItem("plan", "Pro")
-})
 
 
