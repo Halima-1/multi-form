@@ -47,23 +47,22 @@ const loadPage = () => {
     }
     else if (formPageIndex === 3) {
         formPage.innerHTML += `  
-        // <form action="">
     <!-- Add-ons Step -->
 <h2>Choose Add-ons</h2>
 <p>Select additional features to enhance your subscription.</p>
 <br>
 <label>
-<input type="checkbox" class="addon" data-price="10">
+<input type="checkbox" class="addon" data-price="10" id="support">
 Priority Customer Support — $10/month
 </label>
 <br>
 <label>
-<input type="checkbox" class="addon" data-price="15">
+<input type="checkbox" class="addon" data-price="15" id="collab">
 Team Collaboration (up to 5 users) — $15/month
 </label>
 <br>
 <label>
-<input type="checkbox" class="addon" data-price="20">
+<input type="checkbox" class="addon" data-price="20" id="reports">
 Advanced Analytics & Reports — $20/month
 </label>
 
@@ -72,8 +71,7 @@ Advanced Analytics & Reports — $20/month
 </div>
 
 
-     <button id="nextBtn">Next</button>
-//  </form>`
+     <button id="nextBtn">Next</button>`
     }
 
     else {
@@ -101,20 +99,24 @@ nextBtn.addEventListener("click", () => {
 
 
     console.log(typeof (users))
-    localStorage.setItem("users", JSON.stringify(users))
-
+    const user = {}
     if (formPageIndex === 1) {
         const namee = document.getElementById("name").value
         const email = document.getElementById("email").value
         const phone = document.getElementById("num").value
-        const user = {
-            name: namee,
-            email: email,
-            phone: phone
-        }
+        // const user = {
+        //     name: namee,
+        //     email: email,
+        //     phone: phone
+        // }
+        user.name = namee
+        user.email = email
+        user.phone = phone
         users.push(user)
         if (namee && email && phone) {
             formPageIndex++;
+            users.push(user)
+            localStorage.setItem("users", JSON.stringify(users))
 
             loadPage();
 
@@ -125,19 +127,58 @@ nextBtn.addEventListener("click", () => {
         }
     }
     else if (formPageIndex === 2) {
-        const arcade = document.getElementById("arcade")
-        const advanced = document.getElementById("advanced")
-        const pro = document.getElementById("pro")
-        if (localStorage.getItem("plan")) {
+        const plan = localStorage.getItem("plan")
+        if (plan) {
             formPageIndex++;
-
+            user[0].plan = plan
+            users.push(user)
             loadPage();
+
         }
         else {
             console.log("Kindly select a subscription plan ")
 
         }
     }
+
+    else if (formPageIndex === 3) {
+        const collab = document.getElementById("collab")
+        const report = document.getElementById("report")
+        const support = document.getElementById("support")
+        const addonCheckboxes = document.querySelectorAll(".addon");
+        // const totalDisplay = document.getElementById("addons-total");
+
+        addonCheckboxes.forEach(cb => {
+            cb.addEventListener("change", () => {
+                let total = 0;
+                addonCheckboxes.forEach(item => {
+                    if (item.checked) {
+                        total += parseInt(item.getAttribute("data-price"));
+
+                    }
+                    localStorage.setItem("totalAddons", total)
+                    console.log(item)
+
+                });
+            });
+
+        });
+
+        if (localStorage.getItem("totalAddons")) {
+            formPageIndex++;
+            user[0].plan = localStorage.getItem("totalAddons")
+            users.push(user)
+            endForm();
+        }
+        else {
+            console.log("add addonS ")
+            // endForm()
+
+        }
+
+    }
+    localStorage.setItem("users", JSON.stringify(users))
+
     // else {
     //     endForm();
     // }
@@ -146,6 +187,11 @@ nextBtn.addEventListener("click", () => {
     // window.location.href = "index.html"
 });
 
+const addOns = JSON.parse(localStorage.getItem("addOns")) || []
+const adds = {}
+const arcade = document.getElementById("arcade")
+const advanced = document.getElementById("advanced")
+const pro = document.getElementById("pro")
 arcade.addEventListener("click", () => {
     localStorage.setItem("plan", "Arcade")
 })
@@ -156,4 +202,5 @@ advanced.addEventListener("click", () => {
 pro.addEventListener("click", () => {
     localStorage.setItem("plan", "Pro")
 })
+
 
