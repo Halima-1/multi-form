@@ -15,9 +15,12 @@ main {
     justify-content: space-between;
     margin: auto;
     margin-top: 50px;
-
+    background-color: rgb(221, 222, 223);
+    border-radius: 10px;
     /* align-items: center; */
 }
+
+
 
 #side {
     width: 30%;
@@ -26,11 +29,37 @@ main {
     background-size: cover;
     background-position: center;
     display: block;
-    text-align: center;
+    /* text-align: center; */
     align-content: center;
+    border-radius: 10px;
+
 }
 
-#side p {
+.steps {
+    width: 70%;
+    /* margin: auto; */
+    display: flex;
+    flex-direction: row;
+    /* gap: 20px; */
+    justify-content: space-between;
+    color: white;
+}
+
+.steps div {
+    display: block;
+    text-align: left;
+    width: 60%;
+    margin-bottom: 10px;
+
+}
+
+.steps div p,
+b {
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.page {
     padding: 3px 7px;
     border: 2px solid white;
     border-radius: 100%;
@@ -40,13 +69,12 @@ main {
     margin-bottom: 20px;
     align-self: center;
     align-items: center;
-
 }
 
 #formContainer {
     width: 60%;
     display: block;
-    padding: 20px;
+    padding: 50px 0;
 }
 
 #formContainer h2 {
@@ -73,7 +101,7 @@ input {
     outline: none;
     width: 100%;
     margin: 10px auto;
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
     padding: 7px;
     border-radius: 10px;
 }
@@ -87,21 +115,93 @@ button {
     background-color: navy;
     color: white;
     margin-left: 320px;
+    cursor: pointer;
 }
 
 .plan {
-    width: 70% !important;
+    width: 40% !important;
     display: flex !important;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between !important;
     gap: 15px;
     border: 1px solid grey;
     border-radius: 10px;
+    margin-left: 60px !important;
+    padding: 0 10px;
+    margin-bottom: 25px !important;
+}
 
+.plan:hover {
+    background-color: rgb(93, 93, 190);
 }
 
 .plan img {
     width: 25px;
     height: 25px;
     margin-top: 6px;
+}
+
+.check {
+    width: 90% !important;
+    display: flex !important;
+    cursor: pointer;
+    gap: 15px;
+    font-size: 14px;
+    /* margin: auto; */
+    align-items: center;
+    margin-left: -50px;
+}
+
+.addonContainer {
+    width: 60% !important;
+    border: 1px solid blue;
+    border-radius: 10px;
+
+}
+
+.check div {
+    width: 90% !important;
+    display: block;
+    text-align: left;
+    margin-left: -40px !important;
+    margin-bottom: -5px !important;
+    align-items: center;
+
+
+}
+
+.check div b {
+    color: navy;
+}
+
+.check input {
+    cursor: pointer;
+    margin: -20px !important;
+    padding: 0;
+    width: 80%;
+
+}
+
+.selectedAddon {
+    width: 80% !important;
+    display: block !important;
+    /* margin: auto; */
+
+
+}
+
+.selectedAddon div,
+#totalAmt {
+    width: 70% !important;
+    display: flex !important;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 15px;
+
+}
+
+#plan {
+    width: 80%;
+    margin: 0 auto;
+    color: navy;
 }

@@ -81,20 +81,41 @@ const loadPage = () => {
 <h2>Choose Add-ons</h2>
 <p>Select additional features to enhance your subscription.</p>
 <br>
-<label>
-<input type="checkbox" class="addon" data-price="10" id="support">
-Priority Customer Support — $10/month
-</label>
+<div class="addonContainer">
+                <label class="check">
+                    <input type="checkbox" data-addon="Priority Customer Support" class="addon" data-price="10" id="support">
+                    <div>
+                                    <b>Priority Customer Support
+                                    </b>
+                                    <p>$10/month</p>
+                                   </div>
+                    </label>
+               </div>
 <br>
-<label>
-<input type="checkbox" class="addon" data-price="15" id="collab">
-Team Collaboration (up to 5 users) — $15/month
-</label>
+<div class="addonContainer">
+<label class="check">
+    <input type="checkbox" class="addon" data-addon="Team Collaboration" data-price="15" id="collab">
+    <div>
+    <b>Team Collaboration
+    
+    </b>
+    <p>$15/month</p>
+    </div>
+    </label>
+</div>
 <br>
-<label>
-<input type="checkbox" class="addon" data-price="20" id="reports">
-Advanced Analytics & Reports — $20/month
-</label>
+<div class="addonContainer">
+<label class="check">
+    <input type="checkbox" class="addon" data-addon="Advanced Analytics & Reports" data-price="20" id="reports">
+    <div>
+                    <b id=" >Advanced Analytics & Reports
+    
+    
+                    </b>
+                    <p>$20/month</p>
+                   </div>
+    </label>
+</div>
 
 <div class="total-box">
 <strong>Total Add-ons:</strong> $<span id="addons-total">0</span>/month
@@ -123,21 +144,33 @@ const endForm = () => {
     // to get the summary from localStorage
     const user = JSON.parse(localStorage.getItem("user"))
     formPage.innerHTML = ""
+    const AllAddon = JSON.parse(localStorage.getItem("totalAddons"))
+
     formPage.innerHTML += `
     <h2>Finishing up</h2>
     <p>Double-check everything looks ok before confirming   </p>
-    <h2 id="plan">${user.plann}</h2>
-    <div id="selectedAddon" class="plan">
+    <b id="plan">${user.plann}</b>
+    <div id="selectedAddon" class="selectedAddon">
 
     </div>
-    <div id="totalAmt" class="plan">
-    <p>Total (per month)  </p>
-    <b>${user.addOns}</b>
+
+    <div id="totalAmt" >
+    <p>Total (per month)</p>
+    <b>$${user.addOns}</b>
     </div>
     
     
      <button id="nextBtn">Submit</button>
 `
+    AllAddon.map(item => {
+        document.getElementById("selectedAddon").innerHTML += `
+    <div>
+    <p>${item.selectedAddon}</p>
+    <b>$${item.total}/mo</b>
+    </div>
+
+    `
+    })
     localStorage.clear
 
 }
@@ -233,12 +266,20 @@ nextBtn.addEventListener("click", () => {
         addonCheckboxes.forEach(cb => {
             cb.addEventListener("change", () => {
                 let total = 0;
+                const totalAd = []
+
+                let selectedAddon = ""
                 addonCheckboxes.forEach(item => {
                     if (item.checked) {
                         total += parseInt(item.getAttribute("data-price"));
+                        selectedAddon = item.getAttribute("data-addon");
+                        let eachAddon = { selectedAddon: selectedAddon, total: total }
+                        totalAd.push(eachAddon)
+                        localStorage.setItem("totalAddons", JSON.stringify(totalAd))
 
                     }
-                    localStorage.setItem("totalAddons", total)
+                    localStorage.setItem("totalAddonsPrice", total)
+                    document.getElementById("addons-total").textContent = total
                     console.log(item)
 
                 });
@@ -249,15 +290,13 @@ nextBtn.addEventListener("click", () => {
         if (localStorage.getItem("totalAddons")) {
             formPageIndex++;
             let user = JSON.parse(localStorage.getItem("user"))
-
-            let addOns = JSON.parse(localStorage.getItem("totalAddons"))
-            user.addOns = addOns
+            // let addOns = JSON.parse(localStorage.getItem("totalAddons"))
+            user.addOns = JSON.parse(localStorage.getItem("totalAddonsPrice"))
             users.push(user)
             localStorage.setItem("pageIndex", formPageIndex)
             localStorage.setItem("user", JSON.stringify(user))
             localStorage.setItem("users", JSON.stringify(users))
             // window.location.href = "index.html"
-
             endForm();
 
         }
