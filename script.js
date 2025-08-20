@@ -8,6 +8,10 @@ let page4 = document.getElementById("page4")
 // multiple steps form display
 const loadPage = () => {
     formPage.innerHTML = ""
+    page1.style.backgroundColor = "none"
+    page2.style.backgroundColor = "none"
+    page3.style.backgroundColor = "none"
+    page4.style.backgroundColor = "none"
     if (formPageIndex === 1) {
         page1.style.backgroundColor = "white"
         page1.style.color = "navy"
@@ -109,8 +113,33 @@ loadPage()
 
 // summary page display
 const endForm = () => {
+    page1.style.backgroundColor = "none"
+    page2.style.backgroundColor = "none"
+
+    page4.style.backgroundColor = "white"
+    page4.style.color = "navy"
+    page3.style.backgroundColor = "none"
+
+    // to get the summary from localStorage
+    const user = JSON.parse(localStorage.getItem("user"))
     formPage.innerHTML = ""
-    formPage.innerHTML += "This is the summary page"
+    formPage.innerHTML += `
+    <h2>Finishing up</h2>
+    <p>Double-check everything looks ok before confirming   </p>
+    <h2 id="plan">${user.plann}</h2>
+    <div id="selectedAddon" class="plan">
+
+    </div>
+    <div id="totalAmt" class="plan">
+    <p>Total (per month)  </p>
+    <b>${user.addOns}</b>
+    </div>
+    
+    
+     <button id="nextBtn">Submit</button>
+`
+    localStorage.clear
+
 }
 
 // next button function
@@ -125,8 +154,9 @@ nextBtn.addEventListener("click", () => {
 
 
     console.log(typeof (users))
-    let user = {}
     if (formPageIndex === 1) {
+        let user = {}
+
         const namee = document.getElementById("name").value
         const email = document.getElementById("email").value
         const phone = document.getElementById("num").value
@@ -138,15 +168,16 @@ nextBtn.addEventListener("click", () => {
         user.name = namee
         user.email = email
         user.phone = phone
-        users.push(user)
+        console.log(user)
         if (namee && email && phone) {
             formPageIndex++;
-            users.push(user)
+            // users.push(user)
             localStorage.setItem("user", JSON.stringify(user))
 
-            localStorage.setItem("users", JSON.stringify(users))
+            // localStorage.setItem("users", JSON.stringify(users))
 
             loadPage();
+            window.location.href = "index.html"
 
         }
         else {
@@ -157,16 +188,19 @@ nextBtn.addEventListener("click", () => {
     else if (formPageIndex === 2) {
         let plan = localStorage.getItem("plan")
         console.log(typeof (plan))
+        let user = JSON.parse(localStorage.getItem("user"))
 
         if (plan) {
             formPageIndex++;
-            let user = localStorage.getItem("user")
 
             user.plann = plan
-            users.push(user)
+            // users.push(user)
             localStorage.setItem("pageIndex", formPageIndex)
+            localStorage.setItem("user", JSON.stringify(user))
 
             loadPage();
+            window.location.href = "index.html"
+
 
         }
         else {
@@ -214,14 +248,18 @@ nextBtn.addEventListener("click", () => {
 
         if (localStorage.getItem("totalAddons")) {
             formPageIndex++;
-            let user = localStorage.getItem("user")
+            let user = JSON.parse(localStorage.getItem("user"))
 
             let addOns = JSON.parse(localStorage.getItem("totalAddons"))
             user.addOns = addOns
             users.push(user)
             localStorage.setItem("pageIndex", formPageIndex)
+            localStorage.setItem("user", JSON.stringify(user))
+            localStorage.setItem("users", JSON.stringify(users))
+            // window.location.href = "index.html"
 
             endForm();
+
         }
         else {
             console.log("add addonS ")
@@ -230,16 +268,14 @@ nextBtn.addEventListener("click", () => {
         }
 
     }
-    localStorage.setItem("user", JSON.stringify(user))
+    // localStorage.setItem("user", JSON.stringify(user))
 
-    localStorage.setItem("users", JSON.stringify(users))
 
     // else {
     //     endForm();
     // }
     console.log(formPageIndex)
     localStorage.setItem("pageIndex", formPageIndex)
-    // window.location.href = "index.html"
 });
 
 const addOns = JSON.parse(localStorage.getItem("addOns")) || []
