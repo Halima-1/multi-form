@@ -108,7 +108,7 @@ const loadPage = () => {
 <label class="check">
     <input type="checkbox" class="addon" data-addon="Advanced Analytics & Reports" data-price="20" id="reports">
     <div>
-                    <b id=" >Advanced Analytics & Reports
+                    <b  >Advanced Analytics & Reports
     
     
                     </b>

@@ -9,29 +9,32 @@ main {
 }
 
 .container {
-    width: 70%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    width: 100%;
+    display: block;
+    /* flex-direction: row;
+    justify-content: space-between; */
     margin: auto;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     background-color: rgb(221, 222, 223);
-    border-radius: 10px;
+    /* border-radius: 10px; */
     /* align-items: center; */
+    /* position: absolute; */
 }
 
 
 
 #side {
-    width: 30%;
+    width: 100%;
     background-image: url("assets/images/bg-sidebar-desktop.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    display: block;
-    /* text-align: center; */
-    align-content: center;
-    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* border-radius: 10px; */
+    height: 200px;
 
 }
 
@@ -46,10 +49,10 @@ main {
 }
 
 .steps div {
-    display: block;
-    text-align: left;
+    display: none;
+    /* text-align: left;
     width: 60%;
-    margin-bottom: 10px;
+    margin-bottom: 10px; */
 
 }
 
@@ -72,14 +75,18 @@ b {
 }
 
 #formContainer {
-    width: 60%;
+    width: 90%;
     display: block;
     padding: 50px 0;
+    /* position: relative; */
+    background-color: rgb(216, 216, 247);
+    top: -40px;
+    margin: auto;
 }
 
 #formContainer h2 {
-    font-weight: 600;
-    font-size: 30px;
+    font-weight: 500;
+    font-size: 25px;
     color: navy;
     width: 80%;
     margin: 10px auto;
@@ -87,12 +94,12 @@ b {
 }
 
 #formContainer p {
-    width: 80%;
+    width: 90%;
     margin: 10px auto;
 }
 
 #formContainer div {
-    width: 80%;
+    width: 90%;
     margin: 10px auto;
     display: block;
 }
@@ -107,19 +114,19 @@ input {
 }
 
 button {
-    width: 100px;
+    width: max-content;
     /* margin: 10px auto; */
     border: 1px solid grey;
-    padding: 7px;
+    padding: 7px 20px;
     border-radius: 10px;
     background-color: navy;
     color: white;
-    margin-left: 320px;
+    margin-left: 200px;
     cursor: pointer;
 }
 
 .plan {
-    width: 40% !important;
+    width: 60% !important;
     display: flex !important;
     flex-direction: row;
     justify-content: space-between !important;
@@ -142,19 +149,25 @@ button {
 }
 
 .check {
-    width: 90% !important;
+    width: 100% !important;
     display: flex !important;
     cursor: pointer;
     gap: 15px;
     font-size: 14px;
     /* margin: auto; */
     align-items: center;
-    margin-left: -50px;
+    /* margin-left: -50px; */
+    border: 1px solid navy;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.check:hover {
+    background-color: rgb(93, 93, 190);
 }
 
 .addonContainer {
-    width: 60% !important;
-    border: 1px solid blue;
+    width: 80% !important;
     border-radius: 10px;
 
 }
@@ -186,8 +199,6 @@ button {
     width: 80% !important;
     display: block !important;
     /* margin: auto; */
-
-
 }
 
 .selectedAddon div,
@@ -197,11 +208,212 @@ button {
     justify-content: space-between;
     cursor: pointer;
     gap: 15px;
-
 }
 
 #plan {
     width: 80%;
     margin: 0 auto;
     color: navy;
+}
+
+@media (min-width: 1100px) {
+
+    main {
+        align-items: center;
+    }
+
+    .container {
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: auto;
+        margin-top: 50px;
+        background-color: rgb(221, 222, 223);
+        border-radius: 10px;
+        /* align-items: center; */
+    }
+
+
+
+    #side {
+        width: 30%;
+        background-image: url("assets/images/bg-sidebar-desktop.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: block;
+        /* text-align: center; */
+        align-content: center;
+        border-radius: 10px;
+
+    }
+
+    .steps {
+        width: 70%;
+        /* margin: auto; */
+        display: flex;
+        flex-direction: row;
+        /* gap: 20px; */
+        justify-content: space-between;
+        color: white;
+    }
+
+    .steps div {
+        display: block;
+        text-align: left;
+        width: 60%;
+        margin-bottom: 10px;
+
+    }
+
+    .steps div p,
+    b {
+        margin-bottom: 0;
+        font-size: 14px;
+    }
+
+    .page {
+        padding: 3px 7px;
+        border: 2px solid white;
+        border-radius: 100%;
+        color: white;
+        width: max-content;
+        margin: auto;
+        margin-bottom: 20px;
+        align-self: center;
+        align-items: center;
+    }
+
+    #formContainer {
+        width: 60%;
+        display: block;
+        padding: 50px 0;
+    }
+
+    #formContainer h2 {
+        font-weight: 600;
+        font-size: 30px;
+        color: navy;
+        width: 80%;
+        margin: 10px auto;
+
+    }
+
+    #formContainer p {
+        width: 80%;
+        margin: 10px auto;
+    }
+
+    #formContainer div {
+        width: 80%;
+        margin: 10px auto;
+        display: block;
+    }
+
+    input {
+        outline: none;
+        width: 100%;
+        margin: 10px auto;
+        /* border: 1px solid grey; */
+        padding: 7px;
+        border-radius: 10px;
+    }
+
+    button {
+        width: 100px;
+        /* margin: 10px auto; */
+        border: 1px solid grey;
+        padding: 7px;
+        border-radius: 10px;
+        background-color: navy;
+        color: white;
+        margin-left: 320px;
+        cursor: pointer;
+    }
+
+    .plan {
+        width: 40% !important;
+        display: flex !important;
+        flex-direction: row;
+        justify-content: space-between !important;
+        gap: 15px;
+        border: 1px solid grey;
+        border-radius: 10px;
+        margin-left: 60px !important;
+        padding: 0 10px;
+        margin-bottom: 25px !important;
+    }
+
+    .plan:hover {
+        background-color: rgb(93, 93, 190);
+    }
+
+    .plan img {
+        width: 25px;
+        height: 25px;
+        margin-top: 6px;
+    }
+
+    .check {
+        width: 90% !important;
+        display: flex !important;
+        cursor: pointer;
+        gap: 15px;
+        font-size: 14px;
+        /* margin: auto; */
+        align-items: center;
+        margin-left: -50px;
+    }
+
+    .addonContainer {
+        width: 60% !important;
+        border: 1px solid blue;
+        border-radius: 10px;
+
+    }
+
+    .check div {
+        width: 90% !important;
+        display: block;
+        text-align: left;
+        margin-left: -40px !important;
+        margin-bottom: -5px !important;
+        align-items: center;
+
+
+    }
+
+    .check div b {
+        color: navy;
+    }
+
+    .check input {
+        cursor: pointer;
+        margin: -20px !important;
+        padding: 0;
+        width: 80%;
+
+    }
+
+    .selectedAddon {
+        width: 80% !important;
+        display: block !important;
+        /* margin: auto; */
+    }
+
+    .selectedAddon div,
+    #totalAmt {
+        width: 70% !important;
+        display: flex !important;
+        justify-content: space-between;
+        cursor: pointer;
+        gap: 15px;
+    }
+
+    #plan {
+        width: 80%;
+        margin: 0 auto;
+        color: navy;
+    }
 }
