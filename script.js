@@ -19,7 +19,8 @@ const loadPage = () => {
         formPage.innerHTML += ` 
         <h2>Personal Info</h2>
         <p>Please provide your name, email address and phone number</p>
-        
+        <p id="notify"></p>
+
         <div>
             <label for="name">Name</label> <br>
             <input type="text" name="" id="name" placeholder="e.g Blessing John">
@@ -44,6 +45,7 @@ const loadPage = () => {
         formPage.innerHTML += `
  <h2>Select your plan</h2>
 <p>You have the option of monthly or yearly billing.   </p>
+<p id="notify"></p>
 
 <div id="arcade" class="plan">
 <img src="assets/images/icon-arcade.svg" alt="">
@@ -62,7 +64,7 @@ const loadPage = () => {
 <img src="assets/images/icon-pro.svg" alt="">
 
 <p>Pro</p>
-<p>150$/Yr</p>
+<p>40$/Yr</p>
 </div>
 
  <button id="nextBtn">Next</button>
@@ -81,6 +83,8 @@ const loadPage = () => {
 <h2>Choose Add-ons</h2>
 <p>Select additional features to enhance your subscription.</p>
 <br>
+<p id="notify"></p>
+
 <div class="addonContainer">
                 <label class="check">
                     <input type="checkbox" data-addon="Priority Customer Support" class="addon" data-price="10" id="support">
@@ -108,7 +112,7 @@ const loadPage = () => {
 <label class="check">
     <input type="checkbox" class="addon" data-addon="Advanced Analytics & Reports" data-price="20" id="reports">
     <div>
-                    <b  >Advanced Analytics & Reports
+                    <b>Advanced Analytics & Reports
     
     
                     </b>
@@ -145,18 +149,21 @@ const endForm = () => {
     const user = JSON.parse(localStorage.getItem("user"))
     formPage.innerHTML = ""
     const AllAddon = JSON.parse(localStorage.getItem("totalAddons"))
-
+    const planPrice = JSON.parse(localStorage.getItem("plan-price"))
     formPage.innerHTML += `
     <h2>Finishing up</h2>
     <p>Double-check everything looks ok before confirming   </p>
+    <div id="selectedPlan">
     <b id="plan">${user.plann}</b>
+    <b>$${planPrice}/mo</b>
+</div>
     <div id="selectedAddon" class="selectedAddon">
 
     </div>
 
     <div id="totalAmt" >
     <p>Total (per month)</p>
-    <b>$${user.addOns}</b>
+    <b>$${user.addOns + planPrice}</b>
     </div>
     
     
@@ -166,7 +173,7 @@ const endForm = () => {
         document.getElementById("selectedAddon").innerHTML += `
     <div>
     <p>${item.selectedAddon}</p>
-    <b>$${item.total}/mo</b>
+    <b>$${item.price}/mo</b>
     </div>
 
     `
@@ -193,6 +200,7 @@ nextBtn.addEventListener("click", () => {
         const namee = document.getElementById("name").value
         const email = document.getElementById("email").value
         const phone = document.getElementById("num").value
+        const notify = document.getElementById("notify")
         // const user = {
         //     name: namee,
         //     email: email,
@@ -215,6 +223,8 @@ nextBtn.addEventListener("click", () => {
         }
         else {
             console.log("input correct details ")
+            notify.textContent = "Kindly input correct details"
+            notify.style.color = "red"
 
         }
     }
@@ -238,7 +248,8 @@ nextBtn.addEventListener("click", () => {
         }
         else {
             console.log("Kindly select a subscription plan ")
-
+            document.getElementById("notify").textContent = "Select a plan to continue"
+            document.getElementById("notify").style.color = "red"
         }
 
         const arcade = document.getElementById("arcade")
@@ -246,13 +257,19 @@ nextBtn.addEventListener("click", () => {
         const pro = document.getElementById("pro")
         arcade.addEventListener("click", () => {
             localStorage.setItem("plan", "Arcade")
+            localStorage.setItem("plan-price", 9)
+
         })
 
         advanced.addEventListener("click", () => {
             localStorage.setItem("plan", "Advanced")
+            localStorage.setItem("plan-price", 15)
+
         })
         pro.addEventListener("click", () => {
             localStorage.setItem("plan", "Pro")
+            localStorage.setItem("plan-price", 40)
+
         })
     }
 
@@ -272,10 +289,13 @@ nextBtn.addEventListener("click", () => {
                 addonCheckboxes.forEach(item => {
                     if (item.checked) {
                         total += parseInt(item.getAttribute("data-price"));
+                        let price = parseInt(item.getAttribute("data-price"));
+
                         selectedAddon = item.getAttribute("data-addon");
-                        let eachAddon = { selectedAddon: selectedAddon, total: total }
+                        let eachAddon = { selectedAddon: selectedAddon, price: price }
                         totalAd.push(eachAddon)
                         localStorage.setItem("totalAddons", JSON.stringify(totalAd))
+                        document.getElementById("notify").textContent = ""
 
                     }
                     localStorage.setItem("totalAddonsPrice", total)
@@ -302,6 +322,8 @@ nextBtn.addEventListener("click", () => {
         }
         else {
             console.log("add addonS ")
+            document.getElementById("notify").textContent = "Select at least one add-on to continue"
+            document.getElementById("notify").style.color = "red"
             // endForm()
 
         }

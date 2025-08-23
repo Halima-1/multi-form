@@ -8,6 +8,24 @@ main {
     align-items: center;
 }
 
+h2,
+h3 {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+p,
+b,
+span,
+label {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    line-height: 30px;
+    color: rgb(29, 28, 28);
+}
+
 .container {
     width: 100%;
     display: block;
@@ -18,7 +36,7 @@ main {
     background-color: rgb(221, 222, 223);
     /* border-radius: 10px; */
     /* align-items: center; */
-    /* position: absolute; */
+    position: absolute;
 }
 
 
@@ -63,7 +81,7 @@ b {
 }
 
 .page {
-    padding: 3px 7px;
+    padding: 1px 7px;
     border: 2px solid white;
     border-radius: 100%;
     color: white;
@@ -78,7 +96,7 @@ b {
     width: 90%;
     display: block;
     padding: 50px 0;
-    /* position: relative; */
+    position: relative;
     background-color: rgb(216, 216, 247);
     top: -40px;
     margin: auto;
@@ -195,19 +213,48 @@ button {
 
 }
 
+#selectedPlan {
+    width: 70% !important;
+    display: flex !important;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 15px;
+}
+
+#selectedPlan b {
+    color: navy;
+    font-weight: 600;
+}
+
 .selectedAddon {
-    width: 80% !important;
+    width: 70% !important;
     display: block !important;
+    border-bottom: 2px solid rgb(161, 157, 157);
     /* margin: auto; */
 }
 
 .selectedAddon div,
+#totalAmt {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between;
+    cursor: pointer;
+    gap: 15px;
+}
+
 #totalAmt {
     width: 70% !important;
     display: flex !important;
     justify-content: space-between;
     cursor: pointer;
     gap: 15px;
+}
+
+.selectedAddon div b,
+#totalAmt b {
+    margin-top: 10px;
+    color: navy;
+    font-weight: 600;
 }
 
 #plan {
@@ -217,6 +264,21 @@ button {
 }
 
 @media (min-width: 1100px) {
+
+    h2,
+    h3 {
+        font-family: "Ubuntu", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+    }
+
+    p,
+    b,
+    s {
+        font-family: "Ubuntu", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
 
     main {
         align-items: center;
