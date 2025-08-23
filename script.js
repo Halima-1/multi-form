@@ -28,12 +28,11 @@ const loadPage = () => {
         </div>
         <div>
             <label for="email">Email address</label>
-            <input type="text" name="" id="email" placeholder="e.g blessingjohn@gmail.com">
+            <input type="email" name="" id="email" placeholder="e.g blessingjohn@gmail.com">
         </div><div>
             <label for="num">Phone number</label>
-            <input type="number" name="" id="num" placeholder="+2348123456789">
+            <input  name="" id="num" placeholder="+2348123456789">
         </div>
-        
         <button id="nextBtn">Next</button>
         `
     }
