@@ -90,7 +90,7 @@ b {
     display: block;
     padding: 50px 0;
     position: relative;
-    background-color: rgb(216, 216, 247);
+    /* background-color: rgb(216, 216, 247); */
     top: -40px;
     margin: auto;
 }
@@ -284,7 +284,7 @@ button {
         justify-content: space-between;
         margin: auto;
         margin-top: 50px;
-        /* background-color: rgb(221, 222, 223); */
+        background-color: rgb(221, 222, 223);
         border-radius: 10px;
         position: static;
     }

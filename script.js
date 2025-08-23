@@ -250,7 +250,7 @@ nextBtn.addEventListener("click", () => {
 
         })
     }
-
+    // form step 2/ Add-ons selection
     else if (formPageIndex === 3) {
         const collab = document.getElementById("collab")
         const report = document.getElementById("report")
@@ -303,22 +303,14 @@ nextBtn.addEventListener("click", () => {
             document.getElementById("notify").textContent = "Select at least one add-on to continue"
             document.getElementById("notify").style.color = "red"
             // endForm()
-
         }
-
     }
-    // localStorage.setItem("user", JSON.stringify(user))
-
-
-    // else {
-    //     endForm();
-    // }
     console.log(formPageIndex)
     localStorage.setItem("pageIndex", formPageIndex)
 });
 
-const addOns = JSON.parse(localStorage.getItem("addOns")) || []
-const adds = {}
+// const addOns = JSON.parse(localStorage.getItem("addOns")) || []
+// const adds = {}
 
 
 
