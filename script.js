@@ -12,6 +12,8 @@ const loadPage = () => {
     page2.style.backgroundColor = "none"
     page3.style.backgroundColor = "none"
     page4.style.backgroundColor = "none"
+
+    // form step one display
     if (formPageIndex === 1) {
         page1.style.backgroundColor = "white"
         page1.style.color = "navy"
@@ -20,7 +22,6 @@ const loadPage = () => {
         <h2>Personal Info</h2>
         <p>Please provide your name, email address and phone number</p>
         <p id="notify"></p>
-
         <div>
             <label for="name">Name</label> <br>
             <input type="text" name="" id="name" placeholder="e.g Blessing John">
@@ -36,55 +37,46 @@ const loadPage = () => {
         <button id="nextBtn">Next</button>
         `
     }
+    // form step two display
     else if (formPageIndex === 2) {
         page1.style.backgroundColor = "none"
-
         page2.style.backgroundColor = "white"
         page2.style.color = "navy"
-
         formPage.innerHTML += `
  <h2>Select your plan</h2>
 <p>You have the option of monthly or yearly billing.   </p>
 <p id="notify"></p>
-
 <div id="arcade" class="plan">
 <img src="assets/images/icon-arcade.svg" alt="">
-
-
 <p>Arcade</p>
 <p>9$/mo</p>
 </div>
 <div id="advanced" class="plan">
 <img src="assets/images/icon-advanced.svg" alt="">
-
 <p>Advanced</p>
 <p>15$/mo</p>
 </div>
 <div id="pro" class="plan">
 <img src="assets/images/icon-pro.svg" alt="">
-
 <p>Pro</p>
 <p>40$/Yr</p>
 </div>
-
  <button id="nextBtn">Next</button>
-
 `
     }
+    // form step three display
     else if (formPageIndex === 3) {
         page1.style.backgroundColor = "none"
         page2.style.backgroundColor = "none"
-
         page3.style.backgroundColor = "white"
         page3.style.color = "navy"
-
         formPage.innerHTML += `  
-    <!-- Add-ons Step -->
+    <!-- Add-ons selection -->
 <h2>Choose Add-ons</h2>
 <p>Select additional features to enhance your subscription.</p>
 <br>
 <p id="notify"></p>
-
+<!-- Add-ons container -->
 <div class="addonContainer">
                 <label class="check">
                     <input type="checkbox" data-addon="Priority Customer Support" class="addon" data-price="10" id="support">
@@ -101,7 +93,6 @@ const loadPage = () => {
     <input type="checkbox" class="addon" data-addon="Team Collaboration" data-price="15" id="collab">
     <div>
     <b>Team Collaboration
-    
     </b>
     <p>$15/month</p>
     </div>
@@ -120,12 +111,9 @@ const loadPage = () => {
                    </div>
     </label>
 </div>
-
 <div class="total-box">
 <strong>Total Add-ons:</strong> $<span id="addons-total">0</span>/month
 </div>
-
-
      <button id="nextBtn">Next</button>`
     }
 
@@ -165,8 +153,6 @@ const endForm = () => {
     <p>Total (per month)</p>
     <b>$${user.addOns + planPrice}</b>
     </div>
-    
-    
      <button id="submitBtn">Submit</button>
 `
     AllAddon.map(item => {
@@ -180,10 +166,10 @@ const endForm = () => {
     })
     localStorage.clear()
 
+    // submit button
     const submitBtn = document.getElementById("submitBtn")
     submitBtn.addEventListener("click", () => {
         localStorage.clear()
-
         window.location.href = "dashboard.html"
 
     })
@@ -194,32 +180,24 @@ const endForm = () => {
 const nextBtn = document.getElementById("nextBtn")
 nextBtn.addEventListener("click", () => {
     // getting user details
-
     const users = JSON.parse(localStorage.getItem("users")) || []
     console.log(typeof (users))
     if (formPageIndex === 1) {
         let user = {}
-
         const namee = document.getElementById("name").value
         const email = document.getElementById("email").value
         const phone = document.getElementById("num").value
         const notify = document.getElementById("notify")
-        // const user = {
-        //     name: namee,
-        //     email: email,
-        //     phone: phone
-        // }
         user.name = namee
         user.email = email
         user.phone = phone
         console.log(user)
+        // confirming user personal info
         if (namee && email && phone) {
             formPageIndex++;
             // users.push(user)
             localStorage.setItem("user", JSON.stringify(user))
-
             // localStorage.setItem("users", JSON.stringify(users))
-
             loadPage();
             window.location.href = "index.html"
 
@@ -231,14 +209,13 @@ nextBtn.addEventListener("click", () => {
 
         }
     }
+    // form step 2/ plan selection
     else if (formPageIndex === 2) {
         let plan = localStorage.getItem("plan")
         console.log(typeof (plan))
         let user = JSON.parse(localStorage.getItem("user"))
-
         if (plan) {
             formPageIndex++;
-
             user.plann = plan
             // users.push(user)
             localStorage.setItem("pageIndex", formPageIndex)
@@ -254,7 +231,6 @@ nextBtn.addEventListener("click", () => {
             document.getElementById("notify").textContent = "Select a plan to continue"
             document.getElementById("notify").style.color = "red"
         }
-
         const arcade = document.getElementById("arcade")
         const advanced = document.getElementById("advanced")
         const pro = document.getElementById("pro")
@@ -263,7 +239,6 @@ nextBtn.addEventListener("click", () => {
             localStorage.setItem("plan-price", 9)
 
         })
-
         advanced.addEventListener("click", () => {
             localStorage.setItem("plan", "Advanced")
             localStorage.setItem("plan-price", 15)

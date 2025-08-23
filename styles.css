@@ -29,13 +29,6 @@ label {
 .container {
     width: 100%;
     display: block;
-    /* flex-direction: row;
-    justify-content: space-between; */
-    margin: auto;
-    /* margin-top: 50px; */
-    background-color: rgb(221, 222, 223);
-    /* border-radius: 10px; */
-    /* align-items: center; */
     position: absolute;
 }
 
@@ -291,9 +284,9 @@ button {
         justify-content: space-between;
         margin: auto;
         margin-top: 50px;
-        background-color: rgb(221, 222, 223);
+        /* background-color: rgb(221, 222, 223); */
         border-radius: 10px;
-        /* align-items: center; */
+        position: static;
     }
 
 
@@ -305,7 +298,7 @@ button {
         background-size: cover;
         background-position: center;
         display: block;
-        /* text-align: center; */
+        height: auto;
         align-content: center;
         border-radius: 10px;
 
@@ -333,10 +326,12 @@ button {
     b {
         margin-bottom: 0;
         font-size: 14px;
+        color: white;
+
     }
 
     .page {
-        padding: 3px 7px;
+        padding: 0 9px;
         border: 2px solid white;
         border-radius: 100%;
         color: white;
@@ -351,6 +346,7 @@ button {
         width: 60%;
         display: block;
         padding: 50px 0;
+        position: static;
     }
 
     #formContainer h2 {
@@ -408,7 +404,7 @@ button {
     }
 
     .plan:hover {
-        background-color: rgb(93, 93, 190);
+        background-color: rgb(141, 141, 214);
     }
 
     .plan img {
@@ -430,7 +426,7 @@ button {
 
     .addonContainer {
         width: 60% !important;
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
         border-radius: 10px;
 
     }
@@ -458,13 +454,35 @@ button {
 
     }
 
+    #selectedPlan {
+        width: 70% !important;
+        display: flex !important;
+        justify-content: space-between;
+        cursor: pointer;
+        gap: 15px;
+    }
+
+    #selectedPlan b {
+        color: navy;
+        font-weight: 600;
+    }
+
     .selectedAddon {
-        width: 80% !important;
+        width: 70% !important;
         display: block !important;
+        border-bottom: 2px solid rgb(161, 157, 157);
         /* margin: auto; */
     }
 
     .selectedAddon div,
+    #totalAmt {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between;
+        cursor: pointer;
+        gap: 15px;
+    }
+
     #totalAmt {
         width: 70% !important;
         display: flex !important;
@@ -473,9 +491,17 @@ button {
         gap: 15px;
     }
 
+    .selectedAddon div b,
+    #totalAmt b {
+        margin-top: 10px;
+        color: navy;
+        font-weight: 600;
+    }
+
     #plan {
         width: 80%;
         margin: 0 auto;
         color: navy;
     }
+
 }
