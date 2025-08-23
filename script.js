@@ -167,7 +167,7 @@ const endForm = () => {
     </div>
     
     
-     <button id="nextBtn">Submit</button>
+     <button id="submitBtn">Submit</button>
 `
     AllAddon.map(item => {
         document.getElementById("selectedAddon").innerHTML += `
@@ -178,7 +178,15 @@ const endForm = () => {
 
     `
     })
-    localStorage.clear
+    localStorage.clear()
+
+    const submitBtn = document.getElementById("submitBtn")
+    submitBtn.addEventListener("click", () => {
+        localStorage.clear()
+
+        window.location.href = "dashboard.html"
+
+    })
 
 }
 
@@ -188,11 +196,6 @@ nextBtn.addEventListener("click", () => {
     // getting user details
 
     const users = JSON.parse(localStorage.getItem("users")) || []
-
-
-
-
-
     console.log(typeof (users))
     if (formPageIndex === 1) {
         let user = {}
